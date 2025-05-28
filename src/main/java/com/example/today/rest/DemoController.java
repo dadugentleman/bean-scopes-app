@@ -39,10 +39,21 @@ public class DemoController {
     }
 
     private Chef myChef;
+    private Chef secondChef;
+
+    @GetMapping("/check")
+    public String check() {
+        return "Comparing beans: myChef == secondChef, " + (myChef == secondChef);
+    }
 
     //Constructor
     @Autowired
-    public DemoController(Chef theChef) {
+    public DemoController(@Qualifier("moldovanChef") Chef theChef,
+                          @Qualifier("moldovanChef") Chef theSecondChef) {
+        System.out.println("In constructor: " + getClass().getSimpleName());
         myChef = theChef;
+        secondChef = theSecondChef;
     }
+
+
 }
